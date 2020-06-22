@@ -9,6 +9,7 @@ import AlumnoPage from './components/alumno/AlumnoPage'
 import AgentePage from './components/agente/AgentePage'
 import UserPage from './components/user/UserPage'
 import ETSPage from './components/ets/ETSPage'
+import ETS2Page from './components/ets2/ETSPage'
 
 function App() {
   const [auth, setAuth] = React.useState(true);
@@ -34,6 +35,7 @@ function App() {
         <Route exact path='/agentes' component={AgentePage} />
         <Route exact path='/users' component={UserPage} />
         <Route exact path='/ets' component={ETSPage} />
+        <Route exact path='/ets2' component={ETS2Page} />
       </Switch>
     </Router>
   );

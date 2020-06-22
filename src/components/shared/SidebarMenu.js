@@ -135,6 +135,15 @@ export default function CustomizedMenus() {
           </StyledMenuItem>
         </Link>
 
+        <Link to="/ets2">
+          <StyledMenuItem>
+            <ListItemIcon>
+              <Icon className="fas fa-file-alt" />
+            </ListItemIcon>
+            <ListItemText primary="ETS2" />
+          </StyledMenuItem>
+        </Link>
+
       </StyledMenu>
     </div>
   );
