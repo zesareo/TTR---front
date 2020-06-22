@@ -10,6 +10,8 @@ import AgentePage from './components/agente/AgentePage'
 import UserPage from './components/user/UserPage'
 import ETSPage from './components/ets/ETSPage'
 import ETS2Page from './components/ets2/ETSPage'
+import TramiteFase1Page from './components/tramiteFase1/TramiteFase1Page'
+import TramitePage from './components/tramite/TramitePage'
 
 function App() {
   const [auth, setAuth] = React.useState(true);
@@ -36,6 +38,8 @@ function App() {
         <Route exact path='/users' component={UserPage} />
         <Route exact path='/ets' component={ETSPage} />
         <Route exact path='/ets2' component={ETS2Page} />
+        <Route exact path='/tramiteFase1' component={TramiteFase1Page} />
+        <Route exact path='/tramite' component={TramitePage} />
       </Switch>
     </Router>
   );

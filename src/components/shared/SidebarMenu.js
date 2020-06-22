@@ -144,6 +144,24 @@ export default function CustomizedMenus() {
           </StyledMenuItem>
         </Link>
 
+        <Link to="/tramiteFase1">
+          <StyledMenuItem>
+            <ListItemIcon>
+              <Icon className="fas fa-file-alt" />
+            </ListItemIcon>
+            <ListItemText primary="TramiteFase1" />
+          </StyledMenuItem>
+        </Link>
+
+        <Link to="/tramite">
+          <StyledMenuItem>
+            <ListItemIcon>
+              <Icon className="fas fa-file-alt" />
+            </ListItemIcon>
+            <ListItemText primary="Tramite" />
+          </StyledMenuItem>
+        </Link>
+
       </StyledMenu>
     </div>
   );
