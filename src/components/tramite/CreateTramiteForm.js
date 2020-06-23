@@ -10,6 +10,8 @@ import Error from '../shared/Error';
 import TramiteService from '../../services/TramiteService';
 import Spinner from '../shared/Spinner';
 
+import QRCode from "react-qr-code";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     marginLeft: 30,
@@ -47,14 +49,14 @@ const CreateTramiteForm = ({
     estatus : '',
     documento_firmado : '',
     comentario : '',
-    qr: ''
-
+    qr: '',
+    firma:'',
 
   } : tramite;
 
   const [userData, setUserData] = useState(initData);
 
-  let { id, alumno, tipo_tramite, fecha_solicitud, ciclo_escolar, atributos_dictamen, estatus, documento_firmado,comentario,qr } = userData;
+  let { id, alumno, tipo_tramite, fecha_solicitud, ciclo_escolar, atributos_dictamen, estatus, documento_firmado,comentario,qr,firma } = userData;
 
   const handleOnChange = e => {
     setUserData({
@@ -118,6 +120,17 @@ const CreateTramiteForm = ({
       setErrorMessage('El comentario es obligatorio')
       return;
     }
+
+    if (qr === '') {
+      setError(true);
+      setErrorMessage('El qr es obligatorio')
+      return;
+    }
+    if (firma === '') {
+      setError(true);
+      setErrorMessage('La firma es obligatoria')
+      return;
+    }
     
     const userToCreate = type === 'CREATE' ? {      
         id,
@@ -130,8 +143,8 @@ const CreateTramiteForm = ({
         documento_firmado ,
         comentario,
         qr,
-
-      
+        firma,
+        
     } : {
         
         id,
@@ -144,7 +157,8 @@ const CreateTramiteForm = ({
         documento_firmado ,
         comentario,
         qr,
-      
+        firma,
+        
     } 
 
     setLoading(true)
@@ -225,10 +239,15 @@ const CreateTramiteForm = ({
             <TextField id="cilo_escolar" name="ciclo_escolar" onChange={handleOnChange} value={ciclo_escolar} label="Ciclo escolar" variant="outlined" />
             <TextField id="atributos_dictamen" name="atributos_dictamen" onChange={handleOnChange} value={atributos_dictamen} label="Solicitud de dictamen" variant="outlined" />
             <TextField id="estatus" name="estatus" onChange={handleOnChange} value={estatus} label="Estatus" variant="outlined" />
-            <TextField id="documento_firmado" name="documento_firmado" onChange={handleOnChange} value={documento_firmado} label="Documento firmado" variant="outlined" />
+            <input type="file" onChange={handleOnChange}
+            id="documento_firmado" name="documento_firmado"
+            accept=".doc,.docx, .pdf"></input>
             <TextField id="comentario" name="comentario" onChange={handleOnChange} value={comentario} label="Comentario" variant="outlined" />
-            <TextField id="qr" name="qr" onChange={handleOnChange} value={qr} label="QR" variant="outlined" />
-         
+            <TextField id="qr" name="qr" onChange={handleOnChange} value={qr} label="qr" variant="outlined" />
+          
+            <TextField id="firma" name="firma" onChange={handleOnChange} value={firma} label="firma" variant="outlined" />
+            <QRCode value={qr} />
+             
           </form>
         </div>
 

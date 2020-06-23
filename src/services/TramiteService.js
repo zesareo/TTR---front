@@ -36,9 +36,27 @@ export default class TramiteService {
 
   
   updateTramite(tramite) {
+    const formData = new FormData();
+
+    formData.append("tipo_tramite", tramite.tipo_tramite);
+    formData.append("fecha_solicitud", tramite.fecha_solicitud);
+    formData.append("ciclo_escolar", tramite.ciclo_escolar);
+    formData.append("atributos_dictamen", tramite.atributos_dictamen);
+    formData.append("estatus", tramite.estatus);
+    formData.append("comentario", tramite.comentario);
+    formData.append("qr", tramite.qr);
+    formData.append("firma", tramite.firma);
+    
+
+    /*
+    axios.post("http://localhost:8000/api/v1/reports/", formData, {
+      headers: { Authorization: `Token ${token}` }
+    });*/
+
     // console.log('In updateTramite: ', tramite);
     const url = `${API_URL}${tramite.id}`;
-    return axios.put(url, tramite);
+    //return axios.put(url, tramite);
+    return axios.put(url, formData);
   }
   
 }
