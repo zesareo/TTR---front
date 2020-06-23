@@ -69,7 +69,6 @@ function stableSort(array, comparator) {
 const headCells = [
   { id: 'id', numeric: false, disablePadding: true, label: 'ID' },
   { id: 'turno', numeric: false, disablePadding: false, label: 'Turno' },
-  { id: 'precio', numeric: false, disablePadding: false, label: 'Precio' },
   { id: 'materia', numeric: false, disablePadding: false, label: 'Materia' },
   { id: 'fecha', numeric: false, disablePadding: false, label: 'Fecha' },
   { id: 'estatus', numeric: false, disablePadding: false, label: 'Estatus' },
@@ -174,7 +173,7 @@ const EnhancedTableToolbar = (props) => {
       </Typography>
 
 
-      <Tooltip title="Agregar Alumno" aria-label="add">
+      <Tooltip title="Agregar ETS" aria-label="add">
         <Fab color="primary" className={classes.fab} onClick={handleClickCreate}>
           <Icon className="fas fa-plus" style={{ color: teal, fontSize: 15 }} />
         </Fab>
@@ -348,7 +347,6 @@ export default function ETSTable({
                           {row.id}
                         </TableCell>
                         <TableCell align="center">{row.turno}</TableCell>
-                        <TableCell align="center">{row.precio}</TableCell>
                         <TableCell align="center">{row.materia}</TableCell>
                         <TableCell align="center">{row.fecha}</TableCell>
                         <TableCell align="center">{row.estatus}</TableCell>

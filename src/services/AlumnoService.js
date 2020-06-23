@@ -1,5 +1,6 @@
 import axios from 'axios';
-const API_URL = `https://ttrcontrolescolar2020.herokuapp.com/api/appstart/v2/Alumno/`;
+//const API_URL = `https://ttrcontrolescolar2020.herokuapp.com/api/appstart/v2/Alumno/`;
+const API_URL = `http://localhost:8000/api/appstart/v2/Alumno/`;
 
 export default class AlumnosService {
 
