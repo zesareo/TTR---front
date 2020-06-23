@@ -10,6 +10,18 @@ import Error from '../shared/Error';
 import ETSService from '../../services/ETS2Service';
 import Spinner from '../shared/Spinner';
 
+import { PayPalButton } from "react-paypal-button-v2";
+
+const paypalOptions = {
+  clientId: 'AcJWL0XqPD0xAcRMmjQIy0ts5wDUYsCYIjVL4ZBb5ujHykzwmJqxMNURtGOyRPDSYHUqZ-6mIwWeRgsX',
+  intent: 'capture'
+}
+
+const buttonStyles = {
+  layout: 'vertical',
+  shape: 'rect',
+}
+
 const useStyles = makeStyles((theme) => ({
   root: {
     marginLeft: 30,
@@ -172,6 +184,7 @@ const CreateUserForm = ({
 
   const classes = useStyles();
 
+
   return (
     <Fragment>
       {loading
@@ -188,12 +201,44 @@ const CreateUserForm = ({
           {error ? <Error message={errorMessage}></Error> : null}
           <form className={classes.root} noValidate autoComplete="off">
             <TextField id="turno" name="turno" onChange={handleOnChange} value={turno} label="Turno" variant="outlined" />
-            <TextField id="precio" name="precio" onChange={handleOnChange} value={precio} type="number" label="Precio" variant="outlined" />
+            <TextField id="precio" name="precio" onChange={handleOnChange} value="20.00" type="number" label="Precio" variant="outlined" />
             <TextField id="materia" name="materia" onChange={handleOnChange} value={materia} label="Materia" variant="outlined" />
             <TextField id="fecha" name="fecha" onChange={handleOnChange} type="date" value={fecha} label="fecha" variant="outlined" />
             <TextField id="estatus" name="estatus" onChange={handleOnChange} value={estatus} label="Estatus" variant="outlined" />
+            
           </form>
+          <PayPalButton 
+                        paypalOptions={paypalOptions}  
+                        buttonStyles={buttonStyles} 
+
+                        amount={precio} 
+
+                        createOrder={(data, actions) => {
+                          return actions.order.create({
+                            purchase_units: [{
+                              amount: {
+                                currency_code: "USD",
+                                value: "0.01"
+                              }
+                            }],
+                            // application_context: {
+                            //   shipping_preference: "NO_SHIPPING" // default is "GET_FROM_FILE"
+                            // }
+                          });
+                        }}
+
+
+                        onSuccess={(details, data) => {
+                          alert("Transaction completed by " + details.payer.name.given_name);
+                         }
+                        }
+                        
+                        
+
+
+                        />
         </div>
+        
 
       }
 

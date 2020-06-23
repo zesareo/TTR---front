@@ -24,27 +24,31 @@ import Fab from '@material-ui/core/Fab';
 import { teal } from '@material-ui/core/colors';
 
 import Spinner from '../shared/Spinner';
-import TramiteService from '../../services/TramiteService';
+import ETSService from '../../services/ETS2Service';
 import HelperText from '../../utils/HelperText';
 
-import QRCode from "react-qr-code";
+//import { PayPalButton } from 'react-paypal-button'
+import { PayPalButton } from "react-paypal-button-v2";
 
+const paypalOptions = {
+  clientId: 'AcJWL0XqPD0xAcRMmjQIy0ts5wDUYsCYIjVL4ZBb5ujHykzwmJqxMNURtGOyRPDSYHUqZ-6mIwWeRgsX',
+  intent: 'capture'
+}
 
-function createDataTramite(tramite) {
+const buttonStyles = {
+  layout: 'vertical',
+  shape: 'rect',
+}
+
+function createData(ets) {
   return {
-    id: tramite.id,
-    alumno: tramite.alumno,
-    tipo_tramite : tramite.tipo_tramite,
-    fecha_solicitud: tramite.fecha_solicitud,
-    ciclo_escolar: tramite.ciclo_escolar,
-    atributos_dictamen: tramite.atributos_dictamen,
-    estatus : tramite.estatus,
-    documento_firmado : tramite.documento_firmado,
-    comentario : tramite.comentario,
-    qr: tramite.qr,
-    firma: tramite.firma
-
-
+    id: ets.id,
+    
+    turno: ets.turno,
+    precio: ets.precio,
+    materia: ets.materia,
+    fecha: ets.fecha,
+    estatus: ets.estatus
   }
 }
 
@@ -76,16 +80,10 @@ function stableSort(array, comparator) {
 
 const headCells = [
   { id: 'id', numeric: false, disablePadding: true, label: 'ID' },
-  { id: 'alumno', numeric: false, disablePadding: false, label: 'Alumno' },
-  { id: 'tipo_tramite', numeric: false, disablePadding: false, label: 'Tipo Tramite' },
-  { id: 'fecha_solicitud', numeric: false, disablePadding: false, label: 'Fecha Solicitud' },
-  { id: 'ciclo_escolar', numeric: false, disablePadding: false, label: 'Ciclo Escolar' },
-  { id: 'atributos_dictamen', numeric: false, disablePadding: false, label: 'Solicitud del dictamen' },
+  { id: 'turno', numeric: false, disablePadding: false, label: 'Turno' },
+  { id: 'materia', numeric: false, disablePadding: false, label: 'Materia' },
+  { id: 'fecha', numeric: false, disablePadding: false, label: 'Fecha' },
   { id: 'estatus', numeric: false, disablePadding: false, label: 'Estatus' },
-  { id: 'comentario', numeric: false, disablePadding: false, label: 'Comentario' },
-  { id: 'qr', numeric: false, disablePadding: false, label: 'QR' },
-  { id: 'firma', numeric: false, disablePadding: false, label: 'Firma' },
-    
 ];
 
 function EnhancedTableHead(props) {
@@ -95,6 +93,7 @@ function EnhancedTableHead(props) {
   };
 
   return (
+    
     <TableHead>
       <TableRow>
 
@@ -165,10 +164,10 @@ const useToolbarStyles = makeStyles((theme) => ({
 
 const EnhancedTableToolbar = (props) => {
   const classes = useToolbarStyles();
-  const { numSelected, setConfigCreateTramite, setOpenCreateModal } = props;
+  const { numSelected, setConfigCreateItem, setOpenCreateModal } = props;
 
   const handleClickCreate = () => {
-    setConfigCreateTramite({
+    setConfigCreateItem({
       type: 'CREATE',
       item: null
     })
@@ -183,11 +182,11 @@ const EnhancedTableToolbar = (props) => {
     >
 
       <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
-        Tramites
+        ETS
       </Typography>
 
 
-      <Tooltip title="Agregar Tramite" aria-label="add">
+      <Tooltip title="Agregar ETS" aria-label="add">
         <Fab color="primary" className={classes.fab} onClick={handleClickCreate}>
           <Icon className="fas fa-plus" style={{ color: teal, fontSize: 15 }} />
         </Fab>
@@ -225,37 +224,38 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function TramiteTable({
+export default function ETSTable({
   setOpenCreateModal,
   setOpenDelete,
-  setDeleteTramite,
-  setConfigCreateTramite,
+  setDeleteItem,
+  setConfigCreateItem,
   refresh,
   setRefresh
 }) {
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
-  const [orderBy, setOrderBy] = React.useState('calories');
+  const [orderBy, setOrderBy] = React.useState('id');
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [rows, setRows] = React.useState([]);
   const [loading, setLoading] = React.useState([]);
 
+  const es = new ETSService();
+
   React.useEffect(() => {
     if (refresh) {
       setRefresh(false);
-      getTramites();
+      getETS();
     }
   }, [refresh])
 
-  const as = new TramiteService();
-
-  const getTramites = async () => {
-    console.log('Getting data...')
-    const tramite = await as.getTramites()
-    setRows(tramite.map(a => createDataTramite(a)));
+  const getETS = async () => {
+    console.log('Getting Data...');
+    const ets = await es.getETSs()
+    setRows(ets.map(a => createData(a)));
     setLoading(false);
+
   }
 
   const handleRequestSort = (event, property) => {
@@ -274,12 +274,12 @@ export default function TramiteTable({
   };
 
   const handleClickDelete = (id) => {
-    setDeleteTramite({ id, del: false })
+    setDeleteItem({ id, del: false })
     setOpenDelete(true);
   }
 
   const handleClickEdit = (item) => {
-    setConfigCreateTramite({
+    setConfigCreateItem({
       type: 'UPDATE',
       item: item
     })
@@ -305,7 +305,7 @@ export default function TramiteTable({
         <Paper className={classes.paper}>
           <EnhancedTableToolbar
             numSelected={selected.length}
-            setConfigCreateTramite={setConfigCreateTramite}
+            setConfigCreateItem={setConfigCreateItem}
             setOpenCreateModal={setOpenCreateModal}
           />
           <TableContainer>
@@ -359,18 +359,12 @@ export default function TramiteTable({
                         <TableCell component="th" id={labelId} scope="row" >
                           {row.id}
                         </TableCell>
-                        <TableCell align="center">{row.alumno}</TableCell>
-                        <TableCell align="center">{row.tipo_tramite}</TableCell>
-                        <TableCell align="center">{row.fecha_solicitud}</TableCell>
-                        <TableCell align="center">{row.ciclo_escolar}</TableCell>
-                        <TableCell align="center">{row.atributos_dictamen}</TableCell>
+                        <TableCell align="center">{row.turno}</TableCell>
+                    <TableCell align="center">{row.materia}</TableCell>
+                        <TableCell align="center">{row.fecha}</TableCell>
                         <TableCell align="center">{row.estatus}</TableCell>
-                        <TableCell align="center">{row.comentario}</TableCell>
-                        
-                    <TableCell align="center">{row.qr ? "Llave pública": ""}</TableCell>
-                    <TableCell align="center">{ row.firma ? "Firmado": ""}</TableCell>
-
-                      </TableRow>
+                        <TableCell align="center"><PayPalButton paypalOptions={paypalOptions}  buttonStyles={buttonStyles} amount={row.precio}  /> </TableCell>
+                        </TableRow>
                     );
                   })}
                 {emptyRows > 0 && (
