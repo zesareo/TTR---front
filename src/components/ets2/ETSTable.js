@@ -27,6 +27,17 @@ import Spinner from '../shared/Spinner';
 import ETSService from '../../services/ETS2Service';
 import HelperText from '../../utils/HelperText';
 
+import { PayPalButton } from 'react-paypal-button'
+
+const paypalOptions = {
+  clientId: 'AcJWL0XqPD0xAcRMmjQIy0ts5wDUYsCYIjVL4ZBb5ujHykzwmJqxMNURtGOyRPDSYHUqZ-6mIwWeRgsX',
+  intent: 'capture'
+}
+
+const buttonStyles = {
+  layout: 'vertical',
+  shape: 'rect',
+}
 
 function createData(ets) {
   return {
@@ -81,6 +92,7 @@ function EnhancedTableHead(props) {
   };
 
   return (
+    
     <TableHead>
       <TableRow>
 
@@ -350,7 +362,8 @@ export default function ETSTable({
                         <TableCell align="center">{row.materia}</TableCell>
                         <TableCell align="center">{row.fecha}</TableCell>
                         <TableCell align="center">{row.estatus}</TableCell>
-                      </TableRow>
+                        <TableCell align="center">p<PayPalButton paypalOptions={paypalOptions}  buttonStyles={buttonStyles} amount={1.00} /> </TableCell>
+                        </TableRow>
                     );
                   })}
                 {emptyRows > 0 && (

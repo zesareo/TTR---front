@@ -41,7 +41,8 @@ function createDataTramite(tramite) {
     estatus : tramite.estatus,
     documento_firmado : tramite.documento_firmado,
     comentario : tramite.comentario,
-    qr: tramite.qr
+    qr: tramite.qr,
+    firma: tramite.firma
 
 
   }
@@ -83,6 +84,7 @@ const headCells = [
   { id: 'estatus', numeric: false, disablePadding: false, label: 'Estatus' },
   { id: 'comentario', numeric: false, disablePadding: false, label: 'Comentario' },
   { id: 'qr', numeric: false, disablePadding: false, label: 'QR' },
+  { id: 'firma', numeric: false, disablePadding: false, label: 'Firma' },
     
 ];
 
@@ -365,7 +367,8 @@ export default function TramiteTable({
                         <TableCell align="center">{row.estatus}</TableCell>
                         <TableCell align="center">{row.comentario}</TableCell>
                         
-                        <TableCell align="center">"Llave pública"</TableCell>
+                    <TableCell align="center">{row.qr ? "Llave pública": ""}</TableCell>
+                    <TableCell align="center">{ row.firma ? "Firmado": ""}</TableCell>
 
                       </TableRow>
                     );
