@@ -85,9 +85,7 @@ function EnhancedTableHead(props) {
     <TableHead>
       <TableRow>
 
-        <TableCell align='center' style={{ fontWeight: 'bold' }}>
-          Operaciones
-        </TableCell>
+        
         {headCells.map((headCell) => (
           <TableCell
             style={{ fontWeight: 'bold' }}
@@ -328,20 +326,7 @@ export default function TramiteFase1Table({
                         key={row.id}
                         selected={isItemSelected}
                       >
-                        <TableCell align="center">
-                          <Tooltip title="Eliminar">
-                            <IconButton aria-label="delete" onClick={() => handleClickDelete(row.id)}>
-                              <Icon className="fas fa-trash-alt" style={{ color: red[500], fontSize: 18 }} />
-                            </IconButton>
-                          </Tooltip>
-
-                          <Tooltip title="Editar">
-                            <IconButton aria-label="delete" onClick={() => handleClickEdit(row)}>
-                              <Icon className="fas fa-pencil-alt" style={{ fontSize: 18 }} />
-                            </IconButton>
-                          </Tooltip>
-
-                        </TableCell>
+                      
 
                         <TableCell component="th" id={labelId} scope="row" >
                           {row.id}

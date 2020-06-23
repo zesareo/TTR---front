@@ -126,7 +126,7 @@ export default function CustomizedMenus() {
           </StyledMenuItem>
         </Link>
 
-        <Link to="/ets">
+        <Link to="/ets2">
           <StyledMenuItem>
             <ListItemIcon>
               <Icon className="fas fa-file-alt" />
@@ -135,21 +135,12 @@ export default function CustomizedMenus() {
           </StyledMenuItem>
         </Link>
 
-        <Link to="/ets2">
-          <StyledMenuItem>
-            <ListItemIcon>
-              <Icon className="fas fa-file-alt" />
-            </ListItemIcon>
-            <ListItemText primary="ETS2" />
-          </StyledMenuItem>
-        </Link>
-
         <Link to="/tramiteFase1">
           <StyledMenuItem>
             <ListItemIcon>
               <Icon className="fas fa-file-alt" />
             </ListItemIcon>
-            <ListItemText primary="TramiteFase1" />
+            <ListItemText primary="Solicitud de trámite" />
           </StyledMenuItem>
         </Link>
 

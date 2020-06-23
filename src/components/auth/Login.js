@@ -6,6 +6,8 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import Icon from '@material-ui/core/Icon';
 
 import AuthService from '../../services/AuthService';
 
@@ -72,9 +74,9 @@ export default function Login() {
             Inicia Sesión
         </Typography >
           <Typography style={{ marginBottom: 20 }} className={classes.title} color="textSecondary" gutterBottom>
-            Bienvenido PAW
+            Bienvenido SPACE
           </Typography>
-
+          
           <form onSubmit={handleAuth}>
             <TextField
               required

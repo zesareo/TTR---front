@@ -1,5 +1,6 @@
 import axios from 'axios';
-const API_URL = `https://ttrcontrolescolar2020.herokuapp.com/api/appstart/v2/Agente/`;
+//const API_URL = `https://ttrcontrolescolar2020.herokuapp.com/api/appstart/v2/Agente/`;
+const API_URL = `http://localhost:8000/api/appstart/v2/Agente/`;
 
 export default class AgenteService {
 

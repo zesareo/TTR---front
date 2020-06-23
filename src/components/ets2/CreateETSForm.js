@@ -190,7 +190,7 @@ const CreateUserForm = ({
             <TextField id="turno" name="turno" onChange={handleOnChange} value={turno} label="Turno" variant="outlined" />
             <TextField id="precio" name="precio" onChange={handleOnChange} value={precio} type="number" label="Precio" variant="outlined" />
             <TextField id="materia" name="materia" onChange={handleOnChange} value={materia} label="Materia" variant="outlined" />
-            <TextField id="fecha" name="fecha" onChange={handleOnChange} type="date" value={fecha} label="Teléfono" variant="outlined" />
+            <TextField id="fecha" name="fecha" onChange={handleOnChange} type="date" value={fecha} label="fecha" variant="outlined" />
             <TextField id="estatus" name="estatus" onChange={handleOnChange} value={estatus} label="Estatus" variant="outlined" />
           </form>
         </div>

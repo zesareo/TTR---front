@@ -59,7 +59,7 @@ export default function MenuAppBar({ auth, setAuth }) {
         <Toolbar>
           {auth && <SidebarMenu></SidebarMenu>}
           <Typography variant="h6" className={classes.title}>
-            PAW
+            SPACE
           </Typography>
           {auth && (
             <div>
