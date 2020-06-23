@@ -27,6 +27,8 @@ import Spinner from '../shared/Spinner';
 import TramiteService from '../../services/TramiteService';
 import HelperText from '../../utils/HelperText';
 
+import QRCode from "react-qr-code";
+
 
 function createDataTramite(tramite) {
   return {
@@ -362,7 +364,8 @@ export default function TramiteTable({
                         <TableCell align="center">{row.atributos_dictamen}</TableCell>
                         <TableCell align="center">{row.estatus}</TableCell>
                         <TableCell align="center">{row.comentario}</TableCell>
-                        <TableCell align="center">{row.qr}</TableCell>
+                        
+                        <TableCell align="center">"Llave pública"</TableCell>
 
                       </TableRow>
                     );
