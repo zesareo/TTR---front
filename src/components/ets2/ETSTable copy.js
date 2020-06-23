@@ -30,7 +30,6 @@ import HelperText from '../../utils/HelperText';
 //import { PayPalButton } from 'react-paypal-button'
 import { PayPalButton } from "react-paypal-button-v2";
 
-//VERSION ORIGINAL
 const paypalOptions = {
   clientId: 'AcJWL0XqPD0xAcRMmjQIy0ts5wDUYsCYIjVL4ZBb5ujHykzwmJqxMNURtGOyRPDSYHUqZ-6mIwWeRgsX',
   intent: 'capture'
@@ -251,23 +250,6 @@ export default function ETSTable({
     }
   }, [refresh])
 
-  /*
-  const onSuccess = (payment) => {
-    console.log("Your payment was succeeded!", payment);
-  }	        
-  const onCancel = (data) => {
-    // User pressed "cancel" or close Paypal's popup! 
-    console.log('You have cancelled the payment!', data);
-  }	        
-  const onError = (err) => {
-  // The main Paypal's script cannot be loaded or somethings block the loading of that script! 
-    console.log("Error!", err);
-  // Since the Paypal's main script is loaded asynchronously from "https://www.paypalobjects.com/api/checkout.js" 
-  // => sometimes it may take about 0.5 second for everything to get set, or for the button to appear			 
-  }		            
-  let currency = 'MXN'; // or you can set this value from your props or state
-   */
-
   const getETS = async () => {
     console.log('Getting Data...');
     const ets = await es.getETSs()
@@ -381,16 +363,7 @@ export default function ETSTable({
                     <TableCell align="center">{row.materia}</TableCell>
                         <TableCell align="center">{row.fecha}</TableCell>
                         <TableCell align="center">{row.estatus}</TableCell>
-                        <TableCell align="center"><PayPalButton 
-                        paypalOptions={paypalOptions}  
-                        buttonStyles={buttonStyles} 
-                        amount={row.precio} 
-                        onSuccess={(details, data) => {
-                          alert("Transaction completed by " + details.payer.name.given_name);
-                         }
-                        }
-
-                        /> </TableCell>
+                        <TableCell align="center"><PayPalButton paypalOptions={paypalOptions}  buttonStyles={buttonStyles} amount={row.precio}  /> </TableCell>
                         </TableRow>
                     );
                   })}
