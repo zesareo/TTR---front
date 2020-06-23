@@ -381,7 +381,16 @@ export default function ETSTable({
                     <TableCell align="center">{row.materia}</TableCell>
                         <TableCell align="center">{row.fecha}</TableCell>
                         <TableCell align="center">{row.estatus}</TableCell>
-                        
+                        <TableCell align="center"><PayPalButton 
+                        paypalOptions={paypalOptions}  
+                        buttonStyles={buttonStyles} 
+                        amount={row.precio} 
+                        onSuccess={(details, data) => {
+                          alert("Transaction completed by " + details.payer.name.given_name);
+                         }
+                        }
+
+                        /> </TableCell>
                         </TableRow>
                     );
                   })}
